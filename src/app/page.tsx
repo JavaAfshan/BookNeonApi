@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { getBOOk } from "./api/book/route";
+import { GET } from "./api/book/route"; // Adjust the import path
 
 function MyComponent() {
   const [bookData, setBookData] = useState(null);
@@ -8,7 +8,7 @@ function MyComponent() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getBOOk();
+        const data = await GET(); // Use the GET function directly
         setBookData(data);
       } catch (error) {
         console.error("Error fetching book data:", error);
