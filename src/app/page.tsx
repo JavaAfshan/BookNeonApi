@@ -23,11 +23,11 @@ function MyComponent() {
       {bookData ? (
         <ul>
           {bookData.map((book: { id: React.Key | null | undefined; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; author: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }) => (
-            <li key={book.id}>
-              <p>Title: {book.title}</p>
-              <p>Author: {book.author}</p>
-              {/* Add other book properties as needed */}
-            </li>
+            <ul key={book.id}>
+              <li>Title: {book.title}</li>
+              <li>Author: {book.author}</li>
+              <hr/>
+            </ul>
           ))}
         </ul>
       ) : (
