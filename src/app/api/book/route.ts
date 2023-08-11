@@ -1,3 +1,4 @@
+"use client"
 import { NextRequest, NextResponse } from "next/server";
 import Books from "@/database/schema";
 import {db} from "../../../database/index";
@@ -92,3 +93,9 @@ export async function DELETE(request:Request){
 //     }
 //   }
 
+
+export async function getBOOk() {
+  const response = await fetch("http://localhost:3000/api/bookDetail");
+  const data = await response.json();
+  return data;
+}

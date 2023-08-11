@@ -1,14 +1,40 @@
-import User from "../database/schema"
-import {drizzle} from '../../node_modules/drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import Users from "../database/schema";
+"use client"
+import React, { useEffect, useState } from "react";
+import { getBOOk } from "./api/book/route";
 
+function MyComponent() {
+  const [bookData, setBookData] = useState(null);
 
-export default function Home() {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getBOOk();
+        setBookData(data);
+      } catch (error) {
+        console.error("Error fetching book data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
-   <div>
-    Hello
-   </div>
-  )
+    <div>
+      {bookData ? (
+        <ul>
+          {bookData.map((book: { id: React.Key | null | undefined; title: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; author: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }) => (
+            <li key={book.id}>
+              <p>Title: {book.title}</p>
+              <p>Author: {book.author}</p>
+              {/* Add other book properties as needed */}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading book data...</p>
+      )}
+    </div>
+  );
 }
+
+export default MyComponent;
